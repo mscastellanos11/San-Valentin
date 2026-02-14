@@ -41,7 +41,7 @@ musicBtn.addEventListener("click", function () {
         musicBtn.textContent = "💖 Reproducir música";
         isPlaying = false;
     }
-});
+};
 
 // Pantalla 2: Tiempo
 function logicScreen2() {
@@ -291,3 +291,4 @@ function toggleMusic() {
     else { m.pause(); i.classList.replace('fa-pause', 'fa-play'); }
 
 }
+
