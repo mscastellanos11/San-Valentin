@@ -42,6 +42,27 @@ section.active {
     from { opacity: 0; transform: scale(0.98); }
     to { opacity: 1; transform: scale(1); }
 }
+/* Botón de música */
+.music-btn {
+    background: linear-gradient(45deg, #ff4d6d, #ff758f);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+}
+
+.music-btn:active {
+    transform: scale(0.95);
+}
 
 /* --- TARJETAS ESTILO CRISTAL (GLASSMORPHISM) --- */
 .glass-card {
@@ -328,4 +349,5 @@ section#screen7 {
     .memory-card { height: 65px; }
     
     .gallery-img { border-width: 4px; }
+
 }
