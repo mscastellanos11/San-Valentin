@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Mi Persona Favorita ❤️</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Barra de Progreso -->
+    <div class="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Música -->
+    <audio id="bg-music" loop>
+        <source src="/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp3" type="audio/mpeg">
+    </audio>
+
+    
+
+    <!-- PANTALLA 1: INICIO -->
+    <section id="screen1" class="active">
+        <div class="glass-card">
+            <h1 class="display-3 text-danger">Hola mi amor 💖</h1>
+            <p class="fs-4">He preparado una aventura para ti.<br>¿Estás lista para llegar al final?</p>
+            <button class="btn btn-danger btn-lg rounded-pill px-5 mt-3" onclick="startExperience()">Comenzar Historia 💖</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2: LA CARTA -->
+    <section id="screen2">
+        <div class="glass-card">
+            <h2 class="romantic-font display-4">Mi amada Marlin...</h2>
+            <div class="letter-content mt-3">
+                <p>Hoy quiero que este 14 de febrero sea más que una fecha en el calendario, quiero que sea un recordatorio de lo inmensamente importante que eres para mí.
+Quería hacer algo diferente este año, algo que realmente refleje todo lo que significas en mi vida.</p>
+                <p>Cada momento a tu lado es un regalo que agradezco con el alma. Tu sonrisa ilumina mis días, tu voz calma mis pensamientos y tu amor le da sentido a todo lo que hago. A veces las palabras se quedan pequeñas para expresar lo que siento, pero aun así quiero intentarlo, porque mereces saberlo siempre.</p>
+                <p>Que este detalle te recuerde que mi amor por ti no solo se celebra hoy, sino cada día.
+Te amo más de lo que las palabras pueden explicar… y mucho más de lo que imaginas. ❤️</p>
+                <p class="fw-bold">Espera un momento, el amor está cargando... ⏳</p>
+            
+            </div>
+            <p id="msg-2" class="feedback-msg"></p>
+            <button id="btn-next-2" class="btn-next" onclick="nextScreen()">Nivel 2: El Quiz →</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 3: EL QUIZ -->
+    <section id="screen3">
+        <div class="glass-card">
+            <h2 class="mb-4">¿Cuánto me conoces? 🤔</h2>
+            <p id="quiz-question" class="fs-4 fw-bold mb-4"></p>
+            <div id="quiz-options" class="d-grid gap-2"></div>
+            <p id="msg-3" class="feedback-msg"></p>
+            <button id="btn-next-3" class="btn-next" onclick="nextScreen()">Nivel 3: El Corazón →</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 4: MINI JUEGO (Interactivo) -->
+    <section id="screen4">
+        <div class="glass-card">
+            <h2>Encuentra el Corazón Correcto ❤️</h2>
+            <p>Uno de estos corazones guarda la llave de la siguiente pantalla...</p>
+            <div class="heart-grid">
+                <div class="heart-box" onclick="checkHeart(false)">🤍</div>
+                <div class="heart-box" onclick="checkHeart(false)">🤍</div>
+                <div class="heart-box" onclick="checkHeart(true)">🤍</div>
+                <div class="heart-box" onclick="checkHeart(false)">🤍</div>
+                <div class="heart-box" onclick="checkHeart(false)">🤍</div>
+                <div class="heart-box" onclick="checkHeart(false)">🤍</div>
+            </div>
+            <p id="msg-4" class="feedback-msg"></p>
+            <button id="btn-next-4" class="btn-next" onclick="nextScreen()">¡Lo lograste! →</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 5: MEMORAMA (PAREJAS) -->
+    <section id="screen5">
+        <div class="glass-card">
+            <h2>Encuentra las Parejas 🧩</h2>
+            <p>Empareja los iconos para continuar.</p>
+            <div id="memory-grid" class="memory-grid"></div>
+            <button id="btn-next-5" class="btn-next" onclick="nextScreen()">Nivel 5: El Laberinto →</button>
+        </div>
+    </section>
+
+   <!-- 6. LABERINTO -->
+<section id="screen6">
+    <div class="glass-card">
+        <h2 class="romantic-font">Laberinto del Amor 🚩</h2>
+        <p class="small">¡Cruza el camino para ver nuestros recuerdos!</p>
+        
+        <div id="maze-grid" class="maze-grid"></div>
+
+        <div class="maze-controls">
+            <button class="btn btn-up" onclick="movePlayer(0,-1)">↑</button>
+            <button class="btn btn-left" onclick="movePlayer(-1,0)">←</button>
+            <button class="btn btn-down" onclick="movePlayer(0,1)">↓</button>
+            <button class="btn btn-right" onclick="movePlayer(1,0)">→</button>
+        </div>
+        
+        <button id="btn-next-6" class="btn-next" onclick="nextScreen()">¡Meta alcanzada! Continuar →</button>
+    </div>
+</section>
+
+    <!-- PANTALLA 7: GALERÍA -->
+    <section id="screen7">
+        <h2 class="display-4 mb-4 text-danger">Nuestros Recuerdos</h2>
+        <div class="gallery-scroll-area">
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-md-8"><img src="/1.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/2.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/3.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/4.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/5.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/6.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/7.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/8.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/9.jpeg" class="gallery-img"></div>
+                <div class="col-12 col-md-8"><img src="/10.jpeg" class="gallery-img"></div>
+            </div>
+            <button class="btn btn-danger rounded-pill px-5 mt-5 mb-5" onclick="nextScreen()">Ver Mensaje Final 💖</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 8: FINAL -->
+    <section id="screen8">
+        <div class="glass-card">
+            <h2 class="display-3 text-danger">¡Lo lograste! 🏆</h2>
+            <hr>
+            <h3 class="romantic-font display-5">🎟️ VALE POR:</h3>
+            <p class="fs-2">Toda una vida amándote.</p>
+            <p class="lead">Gracias por ser mi persona favorita, Marlin.</p>
+            <p class="mt-4 text-muted small">Hecho por Marlon 💖 2026</p>
+            <button class="btn btn-outline-danger mt-3" onclick="location.reload()">Reiniciar</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

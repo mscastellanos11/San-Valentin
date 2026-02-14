@@ -1,0 +1,331 @@
+/* --- VARIABLES Y CONFIGURACIÓN BASE --- */
+:root {
+    --color-primario: #ff4d6d;
+    --color-secundario: #ff8fa3;
+    --color-fondo: #fff0f3;
+    --color-texto: #590d22;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Bloquea el scroll manual en toda la web */
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    user-select: none; /* Evita que se seleccione texto al tocar botones rápido */
+}
+
+/* --- SISTEMA DE PANTALLAS (SECTIONS) --- */
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none; /* Ocultas por defecto */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+section.active {
+    display: flex; /* Se activa mediante JS */
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- TARJETAS ESTILO CRISTAL (GLASSMORPHISM) --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 2.5rem;
+    border: 2px solid white;
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
+    max-width: 700px;
+    width: 95%;
+}
+
+h1, h2, .romantic-font {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* --- BOTONES DE NAVEGACIÓN DEL JUEGO --- */
+.btn-next {
+    display: none; /* JS lo muestra al validar la actividad */
+    background-color: var(--color-primario);
+    color: white;
+    padding: 14px 35px;
+    border-radius: 50px;
+    border: none;
+    margin-top: 25px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+    transition: 0.3s;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+}
+
+/* --- BARRA DE PROGRESO SUPERIOR --- */
+.progress-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 6px;
+    background: #ffe5ec;
+    z-index: 1000;
+}
+#progress-bar {
+    height: 100%;
+    width: 0%; 
+    background: var(--color-primario);
+    transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- PANTALLA DE GALERÍA (Nivel 7) --- */
+section#screen7 {
+    justify-content: flex-start; 
+    padding-top: 40px;
+}
+
+.gallery-scroll-area {
+    width: 100%;
+    max-width: 900px;
+    max-height: 85vh; 
+    overflow-y: auto; 
+    padding: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primario) transparent;
+}
+
+.gallery-img {
+    width: 100%;
+    height: auto; 
+    max-height: 550px; 
+    object-fit: contain; 
+    border-radius: 15px;
+    border: 6px solid white;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+    transform: scale(1.02);
+}
+
+/* --- Mini-juego Corazones --- */
+.heart-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+.heart-box {
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+}
+.heart-box:hover { transform: scale(1.2); }
+
+/* --- JUEGO DE MEMORAMA (PAREJAS) --- */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 320px;
+}
+
+.memory-card {
+    height: 80px;
+    background: var(--color-primario);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.memory-card .icon {
+    display: none;
+    font-size: 2rem;
+}
+
+.memory-card.flipped {
+    background: white;
+    border: 3px solid var(--color-primario);
+}
+
+.memory-card.flipped .icon {
+    display: block;
+}
+
+/* --- MEJORAS DEL LABERINTO GRANDE (10x10) --- */
+.maze-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* 10 columnas iguales */
+    gap: 2px;
+    margin: 15px auto;
+    background: #ffccd5;
+    padding: 8px;
+    border-radius: 15px;
+    border: 4px solid var(--color-primario);
+    width: 95%; /* Se adapta al ancho del card */
+    max-width: 400px; /* Pero no crece infinito en PC */
+}
+
+.maze-cell {
+    aspect-ratio: 1 / 1; /* Celdas perfectamente cuadradas */
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: min(1.2rem, 4vw);
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.maze-cell.wall {
+    background: var(--color-secundario);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,77,109,0.1) 5px, rgba(255,77,109,0.1) 10px);
+}
+
+.maze-cell.visited {
+    background: #fff0f3;
+    position: relative;
+}
+
+/* Puntito de rastro */
+.maze-cell.visited::after {
+    content: '·';
+    color: var(--color-secundario);
+    font-size: 1rem;
+}
+
+.maze-player {
+    font-size: min(1.5rem, 6vw) !important;
+    z-index: 5;
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
+}
+
+/* Controles en forma de cruz */
+.maze-controls {
+    display: grid;
+    grid-template-areas: 
+        ". up ."
+        "left down right";
+    gap: 10px;
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.btn-up { grid-area: up; }
+.btn-left { grid-area: left; }
+.btn-down { grid-area: down; }
+.btn-right { grid-area: right; }
+
+.maze-controls button {
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+    background: white;
+    color: var(--color-primario);
+    border: 2px solid var(--color-primario);
+    box-shadow: 0 4px 0 var(--color-secundario);
+}
+
+.maze-controls button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--color-secundario);
+}
+/* --- QUIZ: BOTONES DE OPCIONES --- */
+#quiz-options button {
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+/* --- MENSAJES DE FEEDBACK --- */
+.feedback-msg {
+    color: var(--color-primario);
+    font-weight: bold;
+    margin-top: 15px;
+    min-height: 24px;
+}
+
+.shake {
+    animation: shakeAnim 0.5s;
+}
+
+@keyframes shakeAnim {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* --- PARTÍCULAS FLOTANTES --- */
+.heart-particle {
+    position: fixed;
+    color: var(--color-primario);
+    pointer-events: none;
+    z-index: 999;
+    animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* --- CONTROL DE MÚSICA --- */
+.music-control { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 1000; 
+}
+.btn-music { 
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    border: 3px solid white; 
+    background: var(--color-primario); 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* --- RESPONSIVE (CELULARES) --- */
+@media (max-width: 600px) {
+    .glass-card { padding: 1.5rem; width: 95%; }
+    .display-3 { font-size: 2.5rem; }
+    
+    /* Ajuste laberinto en móvil */
+    .maze-grid {
+        grid-template-columns: repeat(5, 42px);
+        grid-template-rows: repeat(5, 42px);
+    }
+    .maze-cell { width: 42px; height: 42px; font-size: 1.2rem; }
+    
+    /* Ajuste memorama en móvil */
+    .memory-card { height: 65px; }
+    
+    .gallery-img { border-width: 4px; }
+}
