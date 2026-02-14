@@ -26,22 +26,6 @@ function startExperience() {
     music.play().catch(() => console.log("Audio waiting for interaction"));
     nextScreen();
 }
-const music = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-btn");
-
-let isPlaying = false;
-
-musicBtn.addEventListener("click", function () {
-    if (!isPlaying) {
-        music.play();
-        musicBtn.textContent = "💔 Pausar música";
-        isPlaying = true;
-    } else {
-        music.pause();
-        musicBtn.textContent = "💖 Reproducir música";
-        isPlaying = false;
-    }
-};
 
 // Pantalla 2: Tiempo
 function logicScreen2() {
@@ -291,4 +275,5 @@ function toggleMusic() {
     else { m.pause(); i.classList.replace('fa-pause', 'fa-play'); }
 
 }
+
 
